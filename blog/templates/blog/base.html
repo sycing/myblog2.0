@@ -37,7 +37,12 @@
 
          <form class="navbar-form navbar-left" action="{% url 'blog:blog_search' %}">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search" name="keyword">
+        {% if keyword %}
+            <input type="text" class="form-control" placeholder="Search" name="keyword" value="{{ keyword }}">
+        {% else %}
+            <input type="text" class="form-control" placeholder="Search" name="keyword">
+        {% endif %}
+
         </div>
         <button type="submit" class="btn btn-default">搜索</button>
       </form>
@@ -89,7 +94,7 @@
     $("#back-to-top").click(function () {
         window.scrollTo(0,0);
     });
- </script
+ </script>
 
 {% block script %}{% endblock %}
 

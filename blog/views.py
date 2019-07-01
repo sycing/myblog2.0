@@ -8,9 +8,7 @@ from django.shortcuts import render_to_response
 # from django_comments.models import q
 from django_comments import models as comment_models
 from django_comments.models import Comment
-
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
-
 
 def reply(request, comment_id):
     if not request.session.get('login', None) and not request.user.is_authenticated:
@@ -45,12 +43,9 @@ def detail(request,blog_id):
     get_comment_list(top_comments)
     return render(request, 'blog/detail.html', locals())
 
-
 def index(request):
     entries = models.Entry.objects.all()
-
     return render(request,'blog/index.html',locals())
-
 
 # def detail(request,blog_id):
 #     # entry = get_object_or_404(models.Entry, id=blog_id)
@@ -66,10 +61,6 @@ def index(request):
 #
 #     return render(request,'blog/detail.html',locals())
 
-
-
-
-
 def make_paginator(objects, page, num=3):
     paginator = Paginator(objects, num)
     try:
@@ -79,7 +70,6 @@ def make_paginator(objects, page, num=3):
     except EmptyPage:
         object_list = paginator.page(paginator.num_pages)
     return object_list, paginator
-
 
 def pagination_data(paginator, page):
     """
@@ -189,7 +179,6 @@ def pagination_data(paginator, page):
     }
     return data
 
-
 def index(request):
     entries = models.Entry.objects.all()
     page = request.GET.get('page', 1)
@@ -221,12 +210,17 @@ def tag(request,tag_id):
 
 def search(request):
     keyword = request.GET.get('keyword',None)
+
     if not keyword:
         error_msg = "请输入关键字"
-        return render(request,'blog/index.html',locals())
+
+        index(request)
+        # return render(request,'blog/index.html',locals())
+
     entries = models.Entry.objects.filter(Q(title__icontains=keyword)
                                           | Q(body__icontains=keyword)
                                           | Q(abstract__icontains=keyword))
+
     page = request.GET.get('page', 1)
     entry_list, paginator = make_paginator(entries, page)
     page_data = pagination_data(paginator, page)
@@ -297,7 +291,6 @@ def login(request):
     request.session['profile_image_url'] = user_info_dict['profile_image_url']
 
     return redirect(request.GET.get('next', '/'))
-
 
 def logout(request):
     if request.session['login']:
