@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_comments',
 
-    'xadmin',
+    # 'xadmin',
     'crispy_forms',
     'reversion',
 ]

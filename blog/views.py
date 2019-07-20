@@ -10,12 +10,15 @@ from django_comments import models as comment_models
 from django_comments.models import Comment
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
+
+def index(request):
+    entries = models.Entry.objects.all()
+    return render(request,'blog/index.html',locals())
 def reply(request, comment_id):
     if not request.session.get('login', None) and not request.user.is_authenticated:
         return redirect('/')
     parent_comment = get_object_or_404(comment_models.Comment, id=comment_id)
     return render(request, 'blog/reply.html', locals())
-
 def detail(request,blog_id):
     # entry = models.Entry.objects.get(id=blog_id)
     entry = get_object_or_404(models.Entry,id=blog_id)
@@ -42,11 +45,6 @@ def detail(request,blog_id):
 
     get_comment_list(top_comments)
     return render(request, 'blog/detail.html', locals())
-
-def index(request):
-    entries = models.Entry.objects.all()
-    return render(request,'blog/index.html',locals())
-
 # def detail(request,blog_id):
 #     # entry = get_object_or_404(models.Entry, id=blog_id)
 #     entry = models.Entry.objects.get(id=blog_id)
@@ -60,7 +58,6 @@ def index(request):
 #     entry.increase_visiting()
 #
 #     return render(request,'blog/detail.html',locals())
-
 def make_paginator(objects, page, num=3):
     paginator = Paginator(objects, num)
     try:
@@ -70,7 +67,6 @@ def make_paginator(objects, page, num=3):
     except EmptyPage:
         object_list = paginator.page(paginator.num_pages)
     return object_list, paginator
-
 def pagination_data(paginator, page):
     """
     用于自定义展示分页页码的方法
@@ -178,7 +174,6 @@ def pagination_data(paginator, page):
         'last': last,
     }
     return data
-
 def index(request):
     entries = models.Entry.objects.all()
     page = request.GET.get('page', 1)
@@ -186,7 +181,6 @@ def index(request):
     page_data = pagination_data(paginator, page)
 
     return render(request, 'blog/index.html', locals())
-
 def catagory(request,category_id):
     c = models.Category.objects.get(id=category_id)
     entries = models.Entry.objects.filter(category=c)
@@ -195,7 +189,6 @@ def catagory(request,category_id):
     page_data = pagination_data(paginator, page)
 
     return render(request, 'blog/index.html', locals())
-
 def tag(request,tag_id):
     # t = models.Tag.objects.get(id=tag_id)
     t = get_object_or_404(models.Tag,id=tag_id)
@@ -207,7 +200,6 @@ def tag(request,tag_id):
     entry_list, paginator = make_paginator(entries, page)
     page_data = pagination_data(paginator, page)
     return render(request, 'blog/index.html', locals())
-
 def search(request):
     keyword = request.GET.get('keyword',None)
 
@@ -225,7 +217,6 @@ def search(request):
     entry_list, paginator = make_paginator(entries, page)
     page_data = pagination_data(paginator, page)
     return render(request, 'blog/index.html', locals())
-
 def archives(request, year, month):
     entries = models.Entry.objects.filter(created_time__year=year, created_time__month=month)
     print(entries)
@@ -233,7 +224,6 @@ def archives(request, year, month):
     entry_list, paginator = make_paginator(entries, page)
     page_data = pagination_data(paginator, page)
     return render(request, 'blog/index.html', locals())
-
 def permission_denied(request,*args,**kwargs):
     '''403'''
     # return render(request, 'blog/403.html', locals())
@@ -241,7 +231,6 @@ def permission_denied(request,*args,**kwargs):
     respone.status_code=403
     return respone
     # return render(respone,locals())
-
 def page_not_found(request,*args,**kwargs):
     '''404'''
     # return render(request, 'blog/404.html', locals())
@@ -249,7 +238,6 @@ def page_not_found(request,*args,**kwargs):
     respone.status_code = 404
     return respone
     # return render(respone,locals())
-
 def page_error(request,*args,**kwargs):
     '''500'''
     # return render(request, 'blog/500.html', locals())
@@ -257,7 +245,6 @@ def page_error(request,*args,**kwargs):
     respone.status_code = 500
     return respone
     # return render(respone,locals())
-
 def login(request):
     import requests
     import json
@@ -291,7 +278,6 @@ def login(request):
     request.session['profile_image_url'] = user_info_dict['profile_image_url']
 
     return redirect(request.GET.get('next', '/'))
-
 def logout(request):
     if request.session['login']:
         del request.session['login']

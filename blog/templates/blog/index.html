@@ -18,14 +18,15 @@
 						<p>
 							<span>作者：{{ entry.author }}</span>
 							<span>&nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{ entry.created_time }}</span>
-							<span>&nbsp;&nbsp;&nbsp;&nbsp;阅读数：{{ entry.visiting }}</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;阅读：{{ entry.visiting }}</span>
+{#                            <span>&nbsp;&nbsp;&nbsp;&nbsp;评论：{{ comment_count }}</span>#}
+
 						</p>
 					{% endfor %}
 					<hr/>
                 {% else %}
 
-                        <h1>没有还是没有，怎么滴……</h1>
-
+                        <h1>没有就是没有，怎么滴……</h1>
                 {% endif %}
 					<!--/.pagination-->
 					<div id="paginator" class="pull-right">

@@ -41,7 +41,7 @@ info_dict = {
 urlpatterns = [
     re_path(r'^$',blog_views.index),
     path('admin/', admin.site.urls),
-    path('xadmin/',xadmin.site.urls),
+    # path('xadmin/',xadmin.site.urls),
     re_path(r'^blog/', include('blog.urls')),
     re_path(r'^latest/feed/$', LatestEntriesFeed()),    #RSS订阅
     re_path(r'^sitemap\.xml$', sitemap, {'sitemaps': {'blog': GenericSitemap(info_dict, priority=0.6)}},

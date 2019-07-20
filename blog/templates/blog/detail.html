@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% load comments %}
 
-{% block title %}博客详情页{% endblock %}
+{% block title %}博客{% endblock %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'blog/css/github.css' %}">
     <link rel="stylesheet" href="{% static 'blog/css/blog_comment.css' %}">
@@ -57,10 +57,10 @@
                 <div class="row">
                     <form class="form-horizontal" action="{% comment_form_target %}" method="post">
                         {% csrf_token %}
-                        <div class="form-group">
+                        <div class="form-group" hidden >
                             <label for="input_title" class="pull-left control-label">&nbsp;&nbsp;&nbsp;&nbsp;评论标题：</label>
                             <div class="col-sm-6">
-                                <input class="form-control" name="comment_title" id="input_title" placeholder="请输入标题" required />
+                                <input class="form-control" name="comment_title" id="input_title" value="无" placeholder="请输入标题" required />
                             </div>
                         </div>
                         <div class="form-group">
@@ -108,7 +108,7 @@
                         {% endif %}
                     </div>
                     <div class="col-md-11 comment-content" style="margin-bottom: 10px;">
-                        <strong>{{ comment.comment_title }}</strong>
+                        <div hidden><strong>{{ comment.comment_title }}</strong></div>
                         <div>
                             {% if comment.parent_comment %}
                                         {{ comment.user_name }}{{ request.user }}
