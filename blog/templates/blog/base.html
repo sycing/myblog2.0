@@ -97,15 +97,20 @@
 
           {% if request.user.is_authenticated %}
               <div class="nav navbar-nav navbar-right" style="">
+                  <label>欢迎您，</label>
                 <a class="label-default"
-                        style="background: #1b9dec">admin
+                        style="background: #1b9dec">{{request.user}}
                 </a>
-
+                &nbsp; &nbsp;
+                <a class="label-default"
+                        style="background: #1b9dec"> 退出
+                </a>
+                &nbsp;&nbsp;
             </div>
           {% else %}
           <div class="nav navbar-nav navbar-right" style="">
                 <button class="btn" onclick="document.getElementById('log').style.display='block'"
-                        style="background: #1b9dec">登陆
+                        style="background: #1b9dec">登录
                 </button>
 
             </div>
@@ -184,6 +189,7 @@
     </div><!-- /.container-fluid -->
 </nav>
 {% block content %}{% endblock %}
+<!--向上的箭头-->
 <div id="back-to-top">
     <i class="glyphicon glyphicon-arrow-up"></i>
 </div>

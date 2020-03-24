@@ -315,6 +315,7 @@ def user_login(request):
 
     elif request.method=="GET":
         return render('/')
+        
 class LoginVeiw(View):
     def get(self,request):
         return render('/')
