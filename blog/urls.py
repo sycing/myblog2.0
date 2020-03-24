@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from . import views
 from django.urls import path,re_path
+from django.views.generic import TemplateView #处理静态文件
 
 
 app_name = 'blog'
@@ -13,4 +14,6 @@ urlpatterns = [
     re_path (r'^search/$', views.search,name='blog_search'),
     re_path(r'^archives/(?P<year>[0-9]+)/(?P<month>[0-9]+)$', views.archives, name='blog_archives'),
     re_path(r'^reply/(?P<comment_id>\d+)/$', views.reply, name='comment_reply'),
+    # path(r'logincheck/',views.user_login)
+    path(r'logincheck/',views.LoginVeiw.as_view())
 ]

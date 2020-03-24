@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{% static 'blog/css/github.css' %}">
     <link rel="stylesheet" href="{% static 'blog/css/blog_comment.css' %}">
 {% endblock %}
-
 {% block content %}
     <div class="container">
         <div class="row">
@@ -39,7 +38,7 @@
                     {% if entry.img %}
                         <img src="{{ entry.img.url }}" width="60%" height="270px"/>
                     {% endif %}
-                    <hr />
+{#                    <hr />#}
                     <p>
                         {{ entry.body|safe }}
                     </p>
@@ -83,7 +82,7 @@
                                 <button type="reset"  class="btn btn-default"><span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;重置</button>
                             </div>
                             <div class="pull-right" style="margin-right: 12px;">
-                                <button type="submit" class="btn btn-success" id="id_submit"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;评论</button>
+                                <button type="submit" class="btn btn-success" id="id_submit"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;</button>
                             </div>
                         </div>
 
@@ -134,16 +133,17 @@
 
             <div class="col-md-3">
                 {% block toc %}
-                    <div class="row">
-                        <div class="widget">
-                            <h3>博客目录</h3>
-                            {{ entry.toc|safe }}
-                        </div>
-                    </div>
+{#                    <div class="row">#}
+{#                        <div class="widget">#}
+{#                            <h3>博客目录</h3>#}
+{#                            {{ entry.toc|safe }}#}
+{#                        </div>#}
+{#                    </div>#}
                 {% endblock %}
                 {% include 'blog/rightSideBar.html' %}
             </div>
         </div>
     </div>
+
 
 {% endblock %}

@@ -42,13 +42,18 @@ urlpatterns = [
     re_path(r'^$',blog_views.index),
     path('admin/', admin.site.urls),
     # path('xadmin/',xadmin.site.urls),
+
     re_path(r'^blog/', include('blog.urls')),
+    re_path(r'^resource/', include('resource.urls')),
+    re_path(r'^contact/', include('contact.urls')),
+
     re_path(r'^latest/feed/$', LatestEntriesFeed()),    #RSS订阅
     re_path(r'^sitemap\.xml$', sitemap, {'sitemaps': {'blog': GenericSitemap(info_dict, priority=0.6)}},
       name='django.contrib.sitemaps.views.sitemap'),       #站点地图
     re_path(r'^comments/', include('django_comments.urls')),
-    re_path(r'^login/$', blog_views.login),
+    re_path(r'^login/$', blog_views.login_old),
     re_path(r'^logout/$', blog_views.logout),
+
 
     ##加载静态图片写法1
     # url(r'^static/(?P<path>.*)$', views_static.serve,

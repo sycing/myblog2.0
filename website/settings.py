@@ -25,6 +25,9 @@ SECRET_KEY = '&8d&&lw%-gze^*^1n74105+j)%wq+g$&*7#79kf#1&51i&r#d*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# AUTHENTICATION_BACKENDS=(
+#     '',
+# )
 ALLOWED_HOSTS = ['*',]
 
 
@@ -39,14 +42,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'blog',
+    'resource',
+    'contact',
+    # 'users',
+
     'django.contrib.sitemaps',
     'django.contrib.sites',
     'django_comments',
 
     # 'xadmin',
-    'crispy_forms',
-    'reversion',
+    # 'crispy_forms',
+    # 'reversion',
 ]
+
+# AUTH_USER_MODEL='users.UserProfile'
 
 SITE_ID =1
 

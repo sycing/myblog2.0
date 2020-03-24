@@ -4,81 +4,199 @@
 <head>
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
-
     <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'blog/css/blog_nav.css' %}" rel="stylesheet">
     <link href="{% static 'blog/css/back-to-top.css' %}" rel="stylesheet">
     {% block css %}{% endblock %}
+    <style type="text/css">
+        .navbar {
+            background: #1b9dec;
+        }
 
+        h3 {
+            width: 100%;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #CCC;
+        }
+
+        #close {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+        }
+
+        #close span {
+            padding: 3px 10px;
+            background-color: #999;
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        #log {
+            display: none;
+            width: 400px;
+            height: 400px;
+            padding: 30px 40px;
+            background-color: #F3F5F6;
+            position: fixed;
+            top: 70px;;
+            right: 30px;
+        }
+
+        .error {
+            float: right;
+            color: red;
+            font-size: 1.2em;
+            margin-right: 10px
+        }
+
+
+        .btn:focus,
+        .btn:active:focus,
+        .btn {
+            outline: none;
+
+        }
+
+    </style>
 </head>
 <body>
-
 <nav class="navbar navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">LUIS</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="my-nav">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/blog/">博客</a></li>
-        <li ><a href="#">学习资源</a></li>
-        <li ><a href="#">联系我</a></li>
-      </ul>
-
-
-         <form class="navbar-form navbar-left" action="{% url 'blog:blog_search' %}">
-        <div class="form-group">
-        {% if keyword %}
-            <input type="text" class="form-control" placeholder="Search" name="keyword" value="{{ keyword }}">
-        {% else %}
-            <input type="text" class="form-control" placeholder="Search" name="keyword">
-        {% endif %}
-
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">LUIS</a>
         </div>
-        <button type="submit" class="btn btn-default">搜索</button>
-      </form>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="my-nav">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/blog/">博客</a></li>
+                <li><a href="/resource/">学习资源</a></li>
+                <li><a href="/contact/">联系我</a></li>
+            </ul>
+            <form class="navbar-form navbar-left" action="{% url 'blog:blog_search' %}">
+                <div class="form-group">
+                    {% if keyword %}
+                        <input type="text" class="form-control" placeholder="Search" name="keyword"
+                               value="{{ keyword }}">
+                    {% else %}
+                        <input type="text" class="form-control" placeholder="Search" name="keyword">
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+
+          {% if request.user.is_authenticated %}
+              <div class="nav navbar-nav navbar-right" style="">
+                <a class="label-default"
+                        style="background: #1b9dec">admin
+                </a>
+
+            </div>
+          {% else %}
+          <div class="nav navbar-nav navbar-right" style="">
+                <button class="btn" onclick="document.getElementById('log').style.display='block'"
+                        style="background: #1b9dec">登陆
+                </button>
+
+            </div>
+          {% endif %}
 
 
-<!--
+
+            <div id="log">
+                <form action="/blog/logincheck/" method="post">
+                    {% csrf_token %}
+                    <h3>请登录</h3>
+                    <div class="form-group">
+                        <label for="username">用户名</label>
+                        <span id="user" class="error"> </span>
+                        <input type="text" class="form-control" name="username"
+                               id="username" placeholder="用户名" onblur='checkName()' required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <span id="psword" class="error"> </span>
+
+                        <input type="password" class="form-control"
+                               name="password"
+                               id="password" placeholder="密码" onblur='checkPassword()' required/>
+
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <span><input type="checkbox" value='true' style="width:15px;height:15px;"> 记住我</span>
+
+                        </label>
+                    </div>
+                    <input type="submit" class="btn btn-primary login-button" value="登录"
+                           style="width:70px;height:40px;"/>
+                    <p class="text-success"><a href="register.html">>>还没账号？去注册</a></p>
+
+                </form>
+
+                <div id="close">
+                    <span onclick="document.getElementById('log').style.display='none'">X</span>
+                </div>
+
+
+            </div>
+            <script>
+
+                var checkName = function () {
+                    document.getElementById("user").innerHTML = "";
+                    var name = eval(document.getElementById('username')).value;
+                    if (name.length > 20 || name.length < 1)
+                        document.getElementById("user").innerHTML = "用户名长度在1-20之间！";
+                }
+                var checkPassword = function () {
+                    document.getElementById("psword").innerHTML = "";
+                    var name = eval(document.getElementById('password')).value;
+                    if (name.length > 12 || name.length < 6)
+                        document.getElementById("psword").innerHTML = "密码长度在6-12之间！";
+                }
+
+            </script>
+            <!--
   <ul class="nav navbar-nav navbar-right">
                 {% if request.session.login %}
                     <li>{{ request.session.screen_name }}<a href="/logout/?next={{ request.path }}">
                         <i class="glyphicon glyphicon-log-out"></i>注销</a></li>
                 {% else %}
                     <li>
-                        <a href="https://api.weibo.com/oauth2/authorize?client_id=2241881638&response_type=code&redirect_uri=http://127.0.0.1:8000/login/?next={{ request.path }}">
+                        <a href="https://api.weibo.com/oauth2/authorize?client_id=2241881638&response_type=code&redirect_uri=http://127.0.0.1:8000/login/?next=
+                {{ request.path }}">
                             <i class="glyphicon glyphicon-log-in"></i>&nbsp;&nbsp;登录</a></li>
                 {% endif %}
             </ul>
 -->
 
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 </nav>
-
 {% block content %}{% endblock %}
 <div id="back-to-top">
-        <i class="glyphicon glyphicon-arrow-up"></i>
-    </div>
- <footer>
+    <i class="glyphicon glyphicon-arrow-up"></i>
+</div>
+<footer>
     <div class="footer" role="navigation">
         <div class="container">
             <div class="navbar-text">
                 <ul class="footer-text">
                     <li><a href="#">主页</a></li>
-                               <li><a href="#">联系我们</a></li>
-                               <li><a href="#">关于博主</a></li>
-                               <li><a href="#">文档支持</a></li>
-                               <li><a href="/blog/">博客首页</a></li>
+                    <li><a href="/contact/">联系我们</a></li>
+                    <li><a href="#">关于博主</a></li>
+                    <li><a href="#">文档支持</a></li>
+                    <li><a href="/blog/">博客首页</a></li>
                 </ul>
                 <p>Copyright © 2019 LUIS </p>
 
@@ -86,17 +204,13 @@
         </div>
     </div>
 </footer>
-
-
 <script src="{% static 'jquery-3.2.1.min.js' %}"></script>
 <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
 <script>
     $("#back-to-top").click(function () {
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     });
- </script>
-
+</script>
 {% block script %}{% endblock %}
-
 </body>
 </html>

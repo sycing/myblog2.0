@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate,login
 from . import models
 import markdown,pygments
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -9,11 +10,13 @@ from django.shortcuts import render_to_response
 from django_comments import models as comment_models
 from django_comments.models import Comment
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.views.generic.base import View
+from .forms import LoginForm
+# from django.contrib.auth.backends import ModelBackend
+# def index(request):
+#     entries = models.Entry.objects.all()
+#     return render(request,'blog/index.html',locals())
 
-
-def index(request):
-    entries = models.Entry.objects.all()
-    return render(request,'blog/index.html',locals())
 def reply(request, comment_id):
     if not request.session.get('login', None) and not request.user.is_authenticated:
         return redirect('/')
@@ -45,19 +48,6 @@ def detail(request,blog_id):
 
     get_comment_list(top_comments)
     return render(request, 'blog/detail.html', locals())
-# def detail(request,blog_id):
-#     # entry = get_object_or_404(models.Entry, id=blog_id)
-#     entry = models.Entry.objects.get(id=blog_id)
-#     md = markdown.Markdown(extensions=[
-#         'markdown.extensions.extra',
-#         'markdown.extensions.codehilite',
-#         'markdown.extensions.toc',
-#     ])
-#     entry.body = md.convert(entry.body)
-#     entry.toc = md.toc
-#     entry.increase_visiting()
-#
-#     return render(request,'blog/detail.html',locals())
 def make_paginator(objects, page, num=3):
     paginator = Paginator(objects, num)
     try:
@@ -206,12 +196,27 @@ def search(request):
     if not keyword:
         error_msg = "请输入关键字"
 
-        index(request)
+        return index(request)
         # return render(request,'blog/index.html',locals())
 
-    entries = models.Entry.objects.filter(Q(title__icontains=keyword)
-                                          | Q(body__icontains=keyword)
-                                          | Q(abstract__icontains=keyword))
+    try:
+        usernamelist = models.User.objects.get(username=keyword)
+        if str(usernamelist.id).isdigit():
+            entries = models.Entry.objects.filter(Q(title__icontains=keyword)
+                                                  | Q(body__icontains=keyword)
+                                                  | Q(abstract__icontains=keyword)
+                                                  | Q(author_id=usernamelist.id)
+                                                  )
+        else:
+            entries = models.Entry.objects.filter(Q(title__icontains=keyword)
+                                                  | Q(body__icontains=keyword)
+                                                  | Q(abstract__icontains=keyword)
+                                                  )
+    except:
+        entries = models.Entry.objects.filter(Q(title__icontains=keyword)
+                                              | Q(body__icontains=keyword)
+                                              | Q(abstract__icontains=keyword)
+                                              )
 
     page = request.GET.get('page', 1)
     entry_list, paginator = make_paginator(entries, page)
@@ -219,7 +224,7 @@ def search(request):
     return render(request, 'blog/index.html', locals())
 def archives(request, year, month):
     entries = models.Entry.objects.filter(created_time__year=year, created_time__month=month)
-    print(entries)
+    # print(entries)
     page = request.GET.get('page', 1)
     entry_list, paginator = make_paginator(entries, page)
     page_data = pagination_data(paginator, page)
@@ -245,7 +250,7 @@ def page_error(request,*args,**kwargs):
     respone.status_code = 500
     return respone
     # return render(respone,locals())
-def login(request):
+def login_old(request):
     import requests
     import json
     from django.conf import settings
@@ -288,3 +293,41 @@ def logout(request):
         return redirect(request.Get.get('next', '/'))
     else:
         return redirect('/')
+# class CustomBackend(ModelBackend):
+#     def authenticate(self,username=None,password=None,**kwargs):
+#         try:
+#             # user=UserProfile.objects.get(
+#             pass
+#         finally:
+#             pass
+
+def user_login(request):
+    if request.method=="POST":
+        user_name=request.POST.get("username","")
+        pass_word=request.POST.get("password","")
+        user=authenticate(username=user_name,password=pass_word)
+        if user is not None:
+            entries = models.Entry.objects.all()
+            login(request,user)
+            return render(request, 'blog/index.html', locals())
+        else:
+            return index(request)
+
+    elif request.method=="GET":
+        return render('/')
+class LoginVeiw(View):
+    def get(self,request):
+        return render('/')
+    def post(self,request):
+        login_form=LoginForm(request.POST)
+        if login_form.is_valid():
+            pass
+            user_name = request.POST.get("username", "")
+            pass_word = request.POST.get("password", "")
+            user = authenticate(username=user_name, password=pass_word)
+            if user is not None:
+                entries = models.Entry.objects.all()
+                login(request, user)
+                return render(request, 'blog/index.html', locals())
+        else:
+            return index(request)

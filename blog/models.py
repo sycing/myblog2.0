@@ -1,13 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.contrib.auth.models import  AbstractUser
 
+# class Userprofile(AbstractUser):
+#     nick_name=models.CharField(max_length=)
 class Category(models.Model):
     name = models.CharField('分类',max_length=128)
-
     def __str__(self):
         return self.name
-
     class Meta:
         verbose_name = '分类'
         verbose_name_plural = verbose_name
