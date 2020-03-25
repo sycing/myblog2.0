@@ -75,7 +75,6 @@
             </button>
             <a class="navbar-brand" href="#">LUIS</a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="my-nav">
             <ul class="nav navbar-nav">
@@ -86,10 +85,10 @@
             <form class="navbar-form navbar-left" action="{% url 'blog:blog_search' %}">
                 <div class="form-group">
                     {% if keyword %}
-                        <input type="text" class="form-control" placeholder="Search" name="keyword"
+                        <input type="text" class="form-control" placeholder="输入作者或文章标题" name="keyword"
                                value="{{ keyword }}">
                     {% else %}
-                        <input type="text" class="form-control" placeholder="Search" name="keyword">
+                        <input type="text" class="form-control" placeholder="输入作者或文章标题" name="keyword">
                     {% endif %}
                 </div>
                 <button type="submit" class="btn btn-default">搜索</button>
@@ -99,13 +98,13 @@
               <div class="nav navbar-nav navbar-right" style="">
                   <label>欢迎您，</label>
                 <a class="label-default"
-                        style="background: #1b9dec">{{request.user}}
+                        style="background: #1b9dec" href="">{{request.user}}
                 </a>
                 &nbsp; &nbsp;
                 <a class="label-default"
-                        style="background: #1b9dec"> 退出
+                style="background: #1b9dec" href="/blog/loginout/"> 退出
                 </a>
-                &nbsp;&nbsp;
+                &nbsp; &nbsp;
             </div>
           {% else %}
           <div class="nav navbar-nav navbar-right" style="">
@@ -115,11 +114,8 @@
 
             </div>
           {% endif %}
-
-
-
             <div id="log">
-                <form action="/blog/logincheck/" method="post">
+                <form action="/blog/login/" method="post">
                     {% csrf_token %}
                     <h3>请登录</h3>
                     <div class="form-group">
@@ -135,7 +131,6 @@
                         <input type="password" class="form-control"
                                name="password"
                                id="password" placeholder="密码" onblur='checkPassword()' required/>
-
                     </div>
                     <div class="checkbox">
                         <label>
@@ -152,11 +147,8 @@
                 <div id="close">
                     <span onclick="document.getElementById('log').style.display='none'">X</span>
                 </div>
-
-
             </div>
             <script>
-
                 var checkName = function () {
                     document.getElementById("user").innerHTML = "";
                     var name = eval(document.getElementById('username')).value;
@@ -205,7 +197,6 @@
                     <li><a href="/blog/">博客首页</a></li>
                 </ul>
                 <p>Copyright © 2019 LUIS </p>
-
             </div>
         </div>
     </div>

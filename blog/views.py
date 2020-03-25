@@ -283,16 +283,21 @@ def login_old(request):
     request.session['profile_image_url'] = user_info_dict['profile_image_url']
 
     return redirect(request.GET.get('next', '/'))
-def logout(request):
-    if request.session['login']:
-        del request.session['login']
-        del request.session['uid']
-        del request.session['token']
-        del request.session['screen_name']
-        del request.session['profile_image_url']
-        return redirect(request.Get.get('next', '/'))
-    else:
-        return redirect('/')
+
+from django.contrib.auth import authenticate, login, logout
+def log_out(request):
+    # if request.session['login']:
+    #     del request.session['login']
+    #     del request.session['uid']
+    #     del request.session['token']
+    #     del request.session['screen_name']
+    #     del request.session['profile_image_url']
+    #     return redirect(request.Get.get('next', '/'))
+    # else:
+    #     return redirect('/')
+    logout(request)
+    return redirect('/')
+
 # class CustomBackend(ModelBackend):
 #     def authenticate(self,username=None,password=None,**kwargs):
 #         try:
@@ -318,7 +323,8 @@ def user_login(request):
         
 class LoginVeiw(View):
     def get(self,request):
-        return render('/')
+        # return render('/')
+        return index(request)
     def post(self,request):
         login_form=LoginForm(request.POST)
         if login_form.is_valid():
@@ -331,4 +337,5 @@ class LoginVeiw(View):
                 login(request, user)
                 return render(request, 'blog/index.html', locals())
         else:
-            return index(request)
+            # return index(request)
+            return render('/')

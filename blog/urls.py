@@ -15,5 +15,6 @@ urlpatterns = [
     re_path(r'^archives/(?P<year>[0-9]+)/(?P<month>[0-9]+)$', views.archives, name='blog_archives'),
     re_path(r'^reply/(?P<comment_id>\d+)/$', views.reply, name='comment_reply'),
     # path(r'logincheck/',views.user_login)
-    path(r'logincheck/',views.LoginVeiw.as_view())
+    path(r'login/',views.LoginVeiw.as_view()),
+    path(r'loginout/',views.log_out)
 ]
