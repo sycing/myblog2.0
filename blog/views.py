@@ -6,6 +6,8 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.db.models import Q
 from django.shortcuts import render,get_object_or_404,redirect
 from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect
+
 # from django_comments.models import q
 from django_comments import models as comment_models
 from django_comments.models import Comment
@@ -198,7 +200,6 @@ def search(request):
 
         return index(request)
         # return render(request,'blog/index.html',locals())
-
     try:
         usernamelist = models.User.objects.get(username=keyword)
         if str(usernamelist.id).isdigit():
@@ -336,6 +337,7 @@ class LoginVeiw(View):
                 entries = models.Entry.objects.all()
                 login(request, user)
                 return render(request, 'blog/index.html', locals())
+                # return HttpResponseRedirect(request.session['form_login'])
         else:
             # return index(request)
             return render('/')
