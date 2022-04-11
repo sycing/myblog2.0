@@ -41,7 +41,7 @@ info_dict = {
 urlpatterns = [
     re_path(r'^$',blog_views.index),
     path('admin/', admin.site.urls),
-    # path('xadmin/',xadmin.site.urls),
+    path('xadmin/',xadmin.site.urls),
 
     re_path(r'^blog/', include('blog.urls')),
     re_path(r'^resource/', include('resource.urls')),
@@ -53,6 +53,8 @@ urlpatterns = [
     re_path(r'^comments/', include('django_comments.urls')),
     re_path(r'^login/$', blog_views.login_old),
     re_path(r'^logout/$', blog_views.logout),
+
+    # url(r'^upload/$', vs.upload,name='upload'),
 
 
     ##加载静态图片写法1

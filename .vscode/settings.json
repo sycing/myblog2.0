@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "E:\\ENVS\\website\\Scripts\\python.exe"
+    "python.pythonPath": "E:\\ENVS\\blog\\Scripts\\python.exe",
+    "python.linting.pylintArgs": ["--generate-members"]
+
 }

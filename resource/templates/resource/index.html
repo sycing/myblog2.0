@@ -4,8 +4,68 @@
 
 {% block title %}博客{% endblock %}
 {% block content %}
-    <div class="container text-center" style="min-height:600px;">
-        <h1>这个人很懒，什么都没有</h1>
-        <a class="btn btn-primary" href="{% url 'blog:blog_index' %}">返回主页</a>
+     {% csrf_token %}
+    <div class="container" style="min-height:600px;">
+        <table class="table  table-striped ">
+  <caption>资源列表</caption>
+            <div class="form-inline">
+            <form id="upload" enctype="multipart/form-data" action="" method="post" style="" onsubmit="return validate_form(this)">
+                {% csrf_token %}
+                <label style="float: left">上传用例：</label>
+                <input type="file" name="myfile" />
+                <input type="submit" value="上传" class="btn btn-default "/>
+            </form>
+        </div>
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>上传时间</th>
+        <th>文件大小</th>
+        <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tanmay</td>
+      <td>Bangalore</td>
+        <td>Bangalore</td>
+        <td>Bangalore</td>
+    </tr>
+  </tbody>
+</table>
 </div>
+<script type="text/javascript">
+//上传案例1
+  function validate_required(field,alerttxt)
+    {
+
+
+
+        with (field)
+      {
+          if (field.files[0]==null || field.files[0] == "")
+                {
+                    alert(alerttxt);
+                    return false
+                }
+          else {
+
+            var filename = field.files[0].name;
+             alert(field.files[0].name+"上传成功！");
+              return true
+      }
+      }
+     }
+    function validate_form(thisform)
+        {
+        with(thisform)
+          {
+          if ( validate_required(myfile,"请先选择文件!")==false )
+            {
+                myfile.focus();
+                return false
+            }
+          }
+         }
+</script>
 {% endblock %}

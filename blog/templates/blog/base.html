@@ -7,6 +7,10 @@
     <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'blog/css/blog_nav.css' %}" rel="stylesheet">
     <link href="{% static 'blog/css/back-to-top.css' %}" rel="stylesheet">
+
+{#     <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>#}
+{#     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">#}
+{#	 <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">#}
     {% block css %}{% endblock %}
     <style type="text/css">
         .navbar {
@@ -98,7 +102,7 @@
               <div class="nav navbar-nav navbar-right" style="">
                   <label>欢迎您，</label>
                 <a class="label-default"
-                        style="background: #1b9dec" href="">{{request.user}}
+                        style="background: #1b9dec" href="/admin">{{request.user}}
                 </a>
                 &nbsp; &nbsp;
                 <a class="label-default"
