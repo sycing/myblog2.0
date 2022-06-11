@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from django.urls import path,re_path
+from django.urls import path, re_path, include
 from django.views.generic import TemplateView #处理静态文件
 
 
@@ -16,5 +16,6 @@ urlpatterns = [
     re_path(r'^reply/(?P<comment_id>\d+)/$', views.reply, name='comment_reply'),
     # path(r'logincheck/',views.user_login)
     path(r'login/',views.LoginVeiw.as_view()),
-    path(r'loginout/',views.log_out)
+    path(r'loginout/',views.log_out),
+    # path('api-auth/', include('rest_framework.urls'))
 ]

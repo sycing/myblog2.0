@@ -44,16 +44,20 @@ INSTALLED_APPS = [
     'blog',
     'resource',
     'contact',
-    # 'users',
+    'users',
 
     'django.contrib.sitemaps',
     'django.contrib.sites',
     'django_comments',
 
     'xadmin',
-    'crispy_forms',
-    'reversion',
+    # 'crispy_forms',
+    # 'reversion',
+    # 'Rest_framwork.apps.Re',
+    # 'rest_framework',
 ]
+
+
 
 # AUTH_USER_MODEL='users.UserProfile'
 
