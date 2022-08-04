@@ -3,18 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="34b4f8a0-288f-4bbc-b061-170b79a5ee9f" name="Default Changelist" comment="增加vue前端">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/13cb91b0-246b-4061-a889-e2bde8edf881.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/templates/resource/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resource/templates/resource/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/resource/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/resource/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -558,7 +547,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654969283941</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="增加vue前端">
+      <created>1659619062341</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1659619062341</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -575,7 +571,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="15" weight="0.32695374" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.5101721" side_tool="true" weight="0.39028475" />
