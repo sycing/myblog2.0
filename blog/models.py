@@ -13,7 +13,6 @@ class Category(models.Model):
         verbose_name = '分类'
         verbose_name_plural = verbose_name
 
-
 class Tag(models.Model):
     name = models.CharField('标签', max_length=128)
 
@@ -23,7 +22,6 @@ class Tag(models.Model):
     class Meta:
         verbose_name = '标签'
         verbose_name_plural = verbose_name
-
 
 class Entry(models.Model):
     title = models.CharField('文章标题',max_length=128)

@@ -9,7 +9,7 @@
         <table class="table  table-striped ">
   <caption>资源列表</caption>
             <div class="form-inline">
-            <form id="upload" enctype="multipart/form-data" action="" method="post" style="" onsubmit="return validate_form(this)">
+            <form id="resource/upload/" enctype="multipart/form-data" action="" method="post" style="" onsubmit="return validate_form(this)">
                 {% csrf_token %}
                 <label style="float: left">上传用例：</label>
                 <input type="file" name="myfile" />
@@ -38,9 +38,6 @@
 //上传案例1
   function validate_required(field,alerttxt)
     {
-
-
-
         with (field)
       {
           if (field.files[0]==null || field.files[0] == "")

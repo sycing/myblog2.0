@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate,login
-from . import models
+# from . import models
 import markdown,pygments
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.db.models import Q
 from django.shortcuts import render,get_object_or_404,redirect
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+from .serializers import *
+
 
 # from django_comments.models import q
 from django_comments import models as comment_models
@@ -59,6 +61,7 @@ def make_paginator(objects, page, num=3):
     except EmptyPage:
         object_list = paginator.page(paginator.num_pages)
     return object_list, paginator
+
 def pagination_data(paginator, page):
     """
     用于自定义展示分页页码的方法
@@ -167,13 +170,13 @@ def pagination_data(paginator, page):
     }
     return data
 def index(request):
-    entries = models.Entry.objects.all()
+    entries =models.Entry.objects.all()
     page = request.GET.get('page', 1)
     entry_list, paginator = make_paginator(entries, page)
     page_data = pagination_data(paginator, page)
 
     return render(request, 'blog/index.html', locals())
-def catagory(request,category_id):
+def CatagoryOldView(request, category_id):
     c = models.Category.objects.get(id=category_id)
     entries = models.Entry.objects.filter(category=c)
     page = request.GET.get('page',1)
@@ -321,7 +324,6 @@ def user_login(request):
 
     elif request.method=="GET":
         return render('/')
-        
 class LoginVeiw(View):
     def get(self,request):
         # return render('/')
@@ -341,3 +343,35 @@ class LoginVeiw(View):
         else:
             # return index(request)
             return render('/')
+from rest_framework import viewsets
+from rest_framework.pagination import PageNumberPagination
+# from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
+class MyPage(PageNumberPagination):
+    page_size_query_param = 'max_page'
+    page_query_param = 'page'
+
+class CatagoryViewSet(viewsets.ModelViewSet):
+    """
+
+    """
+    queryset = models.Category.objects.all()
+    pagination_class = MyPage
+    # filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    serializer_class =CatagorySerializer
+class TagViewSet(viewsets.ModelViewSet):
+    """
+
+    """
+    queryset = models.Tag.objects.all()
+    pagination_class = MyPage
+    # filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    serializer_class =TagSerializer
+class EntryViewSet(viewsets.ModelViewSet):
+    """
+
+    """
+    queryset = models.Entry.objects.all()
+    pagination_class = MyPage
+    # filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    serializer_class =EntrySerializer

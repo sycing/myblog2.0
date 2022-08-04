@@ -51,10 +51,9 @@ INSTALLED_APPS = [
     'django_comments',
 
     'xadmin',
-    # 'crispy_forms',
-    # 'reversion',
-    # 'Rest_framwork.apps.Re',
-    # 'rest_framework',
+    'rest_framework',
+    'crispy_forms',
+    'reversion',
 ]
 
 
@@ -67,7 +66,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -153,3 +152,5 @@ MEDIA_URL = '/media/'
 
 CLIENT_ID = 2234418481
 APP_SECRET = '76daf2e9dxe4245d671x144154f55xc32150'
+
+

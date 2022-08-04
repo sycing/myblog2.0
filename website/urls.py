@@ -26,6 +26,13 @@ from blog.models import Entry
 
 from django.views import static as views_static
 from django.conf.urls import url ##新增
+from rest_framework import routers
+from blog import views
+
+router=routers.DefaultRouter()
+router.register(r'catag', views.CatagoryViewSet)
+router.register(r'tag', views.TagViewSet)
+router.register(r'entry', views.EntryViewSet)
 
 import xadmin
 
@@ -68,6 +75,7 @@ urlpatterns = [
     #加载静态较图片写法3
     url(r'^static/(?P<path>.*)$', views_static.serve, {'document_root': settings.STATIC_ROOT}, name='media'),
     url(r'^media/(?P<path>.*)$', views_static.serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
+    url(r'^api/',include(router.urls)),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT )#添加图片的url
 
 
