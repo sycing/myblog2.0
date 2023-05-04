@@ -61,7 +61,6 @@ def make_paginator(objects, page, num=3):
     except EmptyPage:
         object_list = paginator.page(paginator.num_pages)
     return object_list, paginator
-
 def pagination_data(paginator, page):
     """
     用于自定义展示分页页码的方法
@@ -287,7 +286,6 @@ def login_old(request):
     request.session['profile_image_url'] = user_info_dict['profile_image_url']
 
     return redirect(request.GET.get('next', '/'))
-
 from django.contrib.auth import authenticate, login, logout
 def log_out(request):
     # if request.session['login']:
@@ -301,7 +299,6 @@ def log_out(request):
     #     return redirect('/')
     logout(request)
     return redirect('/')
-
 # class CustomBackend(ModelBackend):
 #     def authenticate(self,username=None,password=None,**kwargs):
 #         try:

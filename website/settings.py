@@ -30,6 +30,7 @@ DEBUG =True
 #     '',
 # )
 ALLOWED_HOSTS = ['*',]
+APPEND_SLASH=False
 
 # Application definition
 
@@ -152,5 +153,7 @@ MEDIA_URL = '/media/'
 
 CLIENT_ID = 2234418481
 APP_SECRET = '76daf2e9dxe4245d671x144154f55xc32150'
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 

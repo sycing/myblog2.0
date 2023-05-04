@@ -7,15 +7,17 @@
      {% csrf_token %}
     <div class="container" style="min-height:600px;">
         <table class="table  table-striped ">
-  <caption>资源列表</caption>
+        <caption>资源列表</caption>
+            {% if request.session.login or request.user.is_authenticated %}
             <div class="form-inline">
-            <form id="resource/upload/" enctype="multipart/form-data" action="" method="post" style="" onsubmit="return validate_form(this)">
+            <form id="upload" enctype="multipart/form-data" action="upload/" method="post" style="" onsubmit="return validate_form(this)">
                 {% csrf_token %}
                 <label style="float: left">上传用例：</label>
                 <input type="file" name="myfile" />
                 <input type="submit" value="上传" class="btn btn-default "/>
             </form>
         </div>
+              {% endif %}
   <thead>
     <tr>
       <th>名称</th>
@@ -25,12 +27,14 @@
     </tr>
   </thead>
   <tbody>
+  {% for rs in resoucre %}
     <tr>
-      <td>Tanmay</td>
-      <td>Bangalore</td>
-        <td>Bangalore</td>
-        <td>Bangalore</td>
+      <td>{{ rs.fileName }} </td>
+      <td>{{ rs.fileCreateDate }}</td>
+        <td>{{ rs.fileSize }}</td>
+        <td></td>
     </tr>
+  {% endfor %}
   </tbody>
 </table>
 </div>

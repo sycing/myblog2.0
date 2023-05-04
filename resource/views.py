@@ -9,10 +9,15 @@ from django.http import HttpResponse
 
 def index(request):
     resoucre=models.Resource.objects.all()
-    return render(request, 'resource/index.html')
+    return render(request, 'resource/index.html', locals())
+
+def test(request):
+    # resoucre=models.Resource.objects.all()
+    return HttpResponse("OK")
 
 def upload(request):
     # file = request.FILES  # 一定要调用上传的文件（不管你干嘛，保存也好，啥也不干也好，反正不调用就出错了，估计是默认不调用就不接收吧。。）才能用ajax上传成功，否则报错，原因不明
+
     if request.method == "POST":  # 请求方法为POST时，进行处理
         myFile = request.FILES.get("myfile", None)  # 获取上传的文件，如果没有文件，则默认为None
         if not myFile:
@@ -22,8 +27,10 @@ def upload(request):
             destination.write(chunk)
         destination.close()
         uploadfilepath = os.path.join("upload", myFile.name)
-        # user = UploadFile()
-        # user.username = myFile.name
-        # user.headImg = uploadfilepath
-        # user.save()  # 上传附件到数据库
-    return HttpResponse()
+        user = models.Resource()
+        user.fileName = myFile.name
+        user.fileSize=myFile.size
+        user.headImg = uploadfilepath
+        user.save()  # 上传附件到数据库
+    # return HttpResponse()
+    return render(request, 'resource/index.html')
