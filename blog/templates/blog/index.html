@@ -10,6 +10,7 @@
 				<div class="col-md-9">
                 {% if entry_list %}
 					{% for entry in entry_list %}
+                        {% if not entry.hide  %}
 						<h2><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h2> <br>
 						{% if entry.img %}
 							<img src="{{ entry.img.url }}" width="60%" height="270px"/>
@@ -26,6 +27,7 @@
 {#                            <span>&nbsp;&nbsp;&nbsp;&nbsp;评论：{{ comment_count }}</span>#}
 
 						</p>
+                        {% endif %}
 					{% endfor %}
 					<hr/>
                 {% else %}

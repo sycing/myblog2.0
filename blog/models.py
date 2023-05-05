@@ -34,6 +34,7 @@ class Entry(models.Model):
     tags = models.ManyToManyField('Tag',verbose_name='标签')
     created_time = models.DateTimeField('创建时间',auto_now_add=True)
     modifyed_time = models.DateTimeField('修改时间',auto_now=True)
+    hide = models.BooleanField('是否隐藏',default=False)
 
     def __str__(self):
         return self.title

@@ -83,8 +83,10 @@
         <div class="collapse navbar-collapse" id="my-nav">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/blog/">博客</a></li>
+                {% if request.user.is_authenticated %}
                 <li><a href="/resource/">学习资源</a></li>
-                <li><a href="/contact/">联系我</a></li>
+                {% endif %}
+{#                <li><a href="/contact/">联系我</a></li>#}
             </ul>
             <form class="navbar-form navbar-left" action="{% url 'blog:blog_search' %}">
                 <div class="form-group">
@@ -102,7 +104,7 @@
               <div class="nav navbar-nav navbar-right" style="">
                   <label>欢迎您，</label>
                 <a class="label-default"
-                        style="background: #1b9dec" href="/admin">{{request.user}}
+                        style="background: #1b9dec" href="/admin/">{{request.user}}
                 </a>
                 &nbsp; &nbsp;
                 <a class="label-default"
@@ -194,10 +196,7 @@
             <div class="navbar-text">
                 <ul class="footer-text">
                     <li><a href="#">主页</a></li>
-                    <li><a href="/contact/">联系我们</a></li>
                     <li><a href="#">关于博主</a></li>
-                    <li><a href="#">文档支持</a></li>
-                    <li><a href="/blog/">博客首页</a></li>
                 </ul>
                 <p>Copyright © 2019 LUIS </p>
             </div>

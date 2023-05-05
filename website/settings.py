@@ -24,13 +24,13 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = '&8d&&lw%-gze^*^1n74105+j)%wq+g$&*7#79kf#1&51i&r#d*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =True
+DEBUG = False
 
 # AUTHENTICATION_BACKENDS=(
 #     '',
 # )
 ALLOWED_HOSTS = ['*',]
-APPEND_SLASH=False
+# APPEND_SLASH=True
 
 # Application definition
 
@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_comments',
 
-    'xadmin',
+    # 'xadmin',
     'rest_framework',
     'crispy_forms',
     'reversion',

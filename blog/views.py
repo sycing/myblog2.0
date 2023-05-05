@@ -52,7 +52,7 @@ def detail(request,blog_id):
 
     get_comment_list(top_comments)
     return render(request, 'blog/detail.html', locals())
-def make_paginator(objects, page, num=3):
+def make_paginator(objects, page, num=10):
     paginator = Paginator(objects, num)
     try:
         object_list = paginator.page(page)
