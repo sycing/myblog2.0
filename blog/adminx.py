@@ -13,7 +13,7 @@ class BaseSetting(object):
 xadmin.site.register(views.BaseAdminView,BaseSetting)
 
 class EntryAdminx(object):
-    list_display=['title','author','visiting','category','tags','created_time','modifyed_time']
+    list_display=['title','author','visiting','category','tags','created_time','modifyed_time','hide']
     search_fields=['title']
     list_filter =['title','author']
 xadmin.site.register(Entry,EntryAdminx)

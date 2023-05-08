@@ -24,7 +24,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = '&8d&&lw%-gze^*^1n74105+j)%wq+g$&*7#79kf#1&51i&r#d*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # AUTHENTICATION_BACKENDS=(
 #     '',

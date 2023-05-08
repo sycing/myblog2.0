@@ -7,11 +7,11 @@
 {#        </ul>#}
    <div class="container">
         <div class="row">
-				<div class="col-md-9">
+				<div class="col-md-9" style="">
                 {% if entry_list %}
 					{% for entry in entry_list %}
                         {% if not entry.hide  %}
-						<h2><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h2> <br>
+						<h3><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h3> <br>
 						{% if entry.img %}
 							<img src="{{ entry.img.url }}" width="60%" height="270px"/>
 						{% endif %}
@@ -20,15 +20,16 @@
 						{% else %}
 							<p>{{ entry.body|truncatechars:100 }}</p>
 						{% endif %}
-						<p>
-							<span>作者：{{ entry.author }}</span>
-							<span>&nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{ entry.created_time }}</span>
+						<span  style="font-size:9.0pt;float: right;font-style: italic">
+{#							<span>作者：{{ entry.author }}</span>#}
+							<span>发布时间：{{ entry.created_time }}</span>
 							<span>&nbsp;&nbsp;&nbsp;&nbsp;阅读：{{ entry.visiting }}</span>
 {#                            <span>&nbsp;&nbsp;&nbsp;&nbsp;评论：{{ comment_count }}</span>#}
-
-						</p>
+						</span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                         {% endif %}
 					{% endfor %}
+                    <br/>
 					<hr/>
                 {% else %}
 

@@ -11,9 +11,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <h1>{{ entry.title }}</h1>
+                <h3>{{ entry.title }}</h3>
                 <p>
-                    <strong>&nbsp;&nbsp;作者：{{ entry.author }}</strong>
+                 <!--   <strong>&nbsp;&nbsp;作者：{{ entry.author }}</strong>-->
                     &nbsp;&nbsp;&nbsp;&nbsp;{{ entry.created_time|date:'Y-m-d' }}
                     &nbsp;&nbsp;&nbsp;&nbsp;分类
                     {% for category in entry.category.all %}
@@ -29,12 +29,12 @@
                 &nbsp;&nbsp;
                     {% get_comment_form for entry as form %}
                     {% get_comment_count for entry  as comment_count %}
-                            评论
-                                {{ comment_count }}
+                {% if request.session.login or request.user.is_authenticated %}
+                    评论    {{ comment_count }}
+                {% endif %}
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     </p>
-
                     {% if entry.img %}
                         <img src="{{ entry.img.url }}" width="60%" height="270px"/>
                     {% endif %}
@@ -42,17 +42,17 @@
                     <p>
                         {{ entry.body|safe }}
                     </p>
+                {% if request.session.login or request.user.is_authenticated %}
+                <div class="row">
+                    <hr />
+                    {% get_comment_form for entry as form %}
+                    {% get_comment_count for entry  as comment_count %}
+{#                    评论： {{ comment_count }}#}
+                    <hr />
+                </div>
 
-{#                <div class="row">#}
-{#                    <hr />#}
-{#                    {% get_comment_form for entry as form %}#}
-{#                    {% get_comment_count for entry  as comment_count %}#}
-{#                    <h4 >评论总数： {{ comment_count }}</h4>#}
-{#                    <hr />#}
-{#                </div>#}
+              {# 评论表单#}
 
-              {#            评论表单#}
-            {% if request.session.login or request.user.is_authenticated %}
                 <div class="row">
                     <form class="form-horizontal" action="{% comment_form_target %}" method="post">
                         {% csrf_token %}
@@ -85,20 +85,20 @@
                                 <button type="submit" class="btn btn-success" id="id_submit"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;</button>
                             </div>
                         </div>
-
-
                     </form>
                 </div>
-            {% else %}
-                <h3>登陆后才可以评论</h3>
-            {% endif %}
-            <hr />
+{#            {% else %}#}
+{#                <h3>登陆后才可以评论</h3>#}
 
+            <hr />
+            {% endif %}
 
 {#            评论显示区#}
-            <div class="row">
+
+        <div class="row">
             {% for comment in comment_list %}
                 <div class="single_comment" style="margin-left: {{ comment.level }}em">
+                {% if request.session.login or request.user.is_authenticated %}
                     <div>
                         {% if comment.user_img %}
                             <img src="{{ comment.user_img }}" alt="user_image" />
@@ -126,19 +126,20 @@
                     <br />
                         <p>{{ comment.comment }}</p>
                     </div>
+                {% endif %}
                 </div>
             {% endfor %}
             </div>
-            </div>
+        </div>
 
             <div class="col-md-3">
                 {% block toc %}
-{#                    <div class="row">#}
-{#                        <div class="widget">#}
-{#                            <h3>博客目录</h3>#}
-{#                            {{ entry.toc|safe }}#}
-{#                        </div>#}
-{#                    </div>#}
+                    <div class="row">
+                        <div class="widget">
+                            <h4>目录</h4>
+                            {{ entry.toc|safe }}
+                        </div>
+                    </div>
                 {% endblock %}
                 {% include 'blog/rightSideBar.html' %}
             </div>

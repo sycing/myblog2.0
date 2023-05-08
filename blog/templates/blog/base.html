@@ -84,17 +84,17 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/blog/">博客</a></li>
                 {% if request.user.is_authenticated %}
-                <li><a href="/resource/">学习资源</a></li>
+                <li><a href="/resource/">资源</a></li>
                 {% endif %}
 {#                <li><a href="/contact/">联系我</a></li>#}
             </ul>
             <form class="navbar-form navbar-left" action="{% url 'blog:blog_search' %}">
                 <div class="form-group">
                     {% if keyword %}
-                        <input type="text" class="form-control" placeholder="输入作者或文章标题" name="keyword"
+                        <input type="text" class="form-control" placeholder="输入文章标题" name="keyword"
                                value="{{ keyword }}">
                     {% else %}
-                        <input type="text" class="form-control" placeholder="输入作者或文章标题" name="keyword">
+                        <input type="text" class="form-control" placeholder="输入文章标题" name="keyword">
                     {% endif %}
                 </div>
                 <button type="submit" class="btn btn-default">搜索</button>
@@ -146,7 +146,7 @@
                     </div>
                     <input type="submit" class="btn btn-primary login-button" value="登录"
                            style="width:70px;height:40px;"/>
-                    <p class="text-success"><a href="register.html">>>还没账号？去注册</a></p>
+                   <!-- <p class="text-success"><a href="register.html">>>还没账号？去注册</a></p>-->
 
                 </form>
 
@@ -195,8 +195,8 @@
         <div class="container">
             <div class="navbar-text">
                 <ul class="footer-text">
-                    <li><a href="#">主页</a></li>
-                    <li><a href="#">关于博主</a></li>
+{#                    <li><a href="#">主页</a></li>#}
+{#                    <li><a href="#">关于博主</a>< /li>#}
                 </ul>
                 <p>Copyright © 2019 LUIS </p>
             </div>
