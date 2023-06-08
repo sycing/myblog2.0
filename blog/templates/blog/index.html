@@ -6,12 +6,15 @@
 {#            <li class="active">博客</li>#}
 {#        </ul>#}
    <div class="container">
+{#        <div class="col-md-4">#}
+{#					{% include 'blog/leftSibeBar.html' %}#}
+{#            </div>#}
         <div class="row">
 				<div class="col-md-9" style="">
                 {% if entry_list %}
 					{% for entry in entry_list %}
                         {% if not entry.hide  %}
-						<h3><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h3> <br>
+						<h4><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h4> <br>
 						{% if entry.img %}
 							<img src="{{ entry.img.url }}" width="60%" height="270px"/>
 						{% endif %}

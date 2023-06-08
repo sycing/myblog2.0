@@ -5,16 +5,15 @@
           class="el-menu-demo"
           mode="horizontal"
           @select="handleSelect"
-          router
-        >
-          <template v-for="(item,pk) in navMenuData" :keytest="pk" >
+          router>
+          <template v-for="item in navMenuData" :key="" >
             <el-menu-item :index="item.index" v-if="!item.child">{{item.name}}</el-menu-item>
 
             <el-submenu :index="item.index" v-if="item.child">
               <template slot="title">{{item.name}}</template>
-              <template v-for="item2 in item.child">
-                <el-menu-item :index="item2.index">{{item2.name}}</el-menu-item>
-              </template>
+              <template v-for="item2 in item.child" :key="">
+                <el-menu-item>{{item2.name}}</el-menu-item> -->
+             </template> 
             </el-submenu>
           </template>
         </el-menu>
@@ -22,8 +21,15 @@
     </template>
 
     <script>
+    // import home from "./components/home"
+    // import articlelist from './articlelist.vue'
     export default {
       name: "NavMenu",
+      components: {
+        home,
+        articlelist
+
+      },
       data() {
         return {
           activeIndex: "hoem",
@@ -33,7 +39,7 @@
             {
               index: "2",
               name: "关于我",
-               // child: [{ index: "2-1", name: "选项1" },{ index: "2-2", name: "选项2" },{ index: "2-3", name: "选项3" }]
+              //  child: [{ index: "2-1", name: "选项1" },{ index: "2-2", name: "选项2" },{ index: "2-3", name: "选项3" }]
             },
 
           ]

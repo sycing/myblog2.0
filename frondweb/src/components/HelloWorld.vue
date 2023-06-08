@@ -8,7 +8,7 @@
 
 </template>
 
-<script>
+<script >
 export default {
   name: 'HelloWorld',
   data () {

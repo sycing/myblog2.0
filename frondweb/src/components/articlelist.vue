@@ -1,12 +1,18 @@
     <template>
       <div>
-       movie页面ddddddd
+        <div>{{test}}</div>
+      <div>dddd</div>
       </div>
     </template>
 
     <script>
     export default {
-     name: 'novel'
+     name: 'novel',
+     data() {
+      return {
+        test: "123"
+      }
+     },
     }
 
     </script>

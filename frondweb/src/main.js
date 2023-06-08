@@ -17,7 +17,7 @@ Vue.use(VueRouter)
 Vue.use(ElementUI)
 
 const routes = [
-  { path: '/movie', component: movie },
+  // { path: '/movie', component: movie },
   { path: '/novel', component: novel }
 ]
 

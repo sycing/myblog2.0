@@ -6,8 +6,15 @@
 
     <script>
     export default {
-      name: 'movie'
+      name: 'home',
+        data(){
+        return{
+
+        }
+
     }
+    }
+
     </script>
 
     <style scoped>

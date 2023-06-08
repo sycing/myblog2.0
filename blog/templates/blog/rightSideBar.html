@@ -2,20 +2,20 @@
 {% load blog_tags %}
 {% block toc %}{% endblock %}
 
-<div class="row">
-    <div class="widget">
-        <h4>分类</h4>
-        {% get_categories as category_list %}
-        <ul class="list-group">
-        {% for category in category_list %}
-            <li class="list-group-item">
-                <a href="{% url 'blog:blog_category' category.id %}">{{ category.name }}</a>
-                <span class="badge">{% get_entry_count_of_category category.name %}</span>
-            </li>
-        {% endfor %}
-        </ul>
-    </div>
-</div>
+{#<div class="row">#}
+{#    <div class="widget">#}
+{#        <h4>分类</h4>#}
+{#        {% get_categories as category_list %}#}
+{#        <ul class="list-group">#}
+{#        {% for category in category_list %}#}
+{#            <li class="list-group-item">#}
+{#                <a href="{% url 'blog:blog_category' category.id %}">{{ category.name }}</a>#}
+{#                <span class="badge">{% get_entry_count_of_category category.name %}</span>#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#        </ul>#}
+{#    </div> #}
+{#</div>#}
 
 <div class="row">
     <div class="widget">
