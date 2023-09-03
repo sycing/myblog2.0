@@ -2,43 +2,56 @@
       <div id="app">
         <el-container>
           <el-header>
-            <NavMenu></NavMenu>
+            <NavMenu/>
           </el-header>
           <el-main>
             <!-- 路由出口 -->
-              <router-view></router-view>
+              <router-view/>
           </el-main>
-          <el-footer>Footer</el-footer>
+          <el-footer></el-footer>
         </el-container>
       </div>
     </template>
      
     <script>
-    import NavMenu from "./components/NavMenu.vue";
+    import nav from "./components/nav";
      
     export default {
       name: "app",
       components: {
-        NavMenu
+        NavMenu: nav
       }
     };
     </script>
      
-    <style scoped>
-    .el-header,
-    .el-footer {
-      background-color: #b3c0d1;
-      color: #333;
+<style scoped>
+
+  /* @import "./assets/css/common.css"; */
+    .el-header {
+      /* background-color: #0850f8ea; */
+      /* color: #fdf8f8; */
       text-align: center;
       height: 100px;
       padding: 0px;
+      line-height: 60px;
     }
      
     .el-main {
-      background-color: #e9eef3;
-      color: #333;
-      text-align: center;
-      line-height: 160px;
-    }
+      background-color: #a7cbf06b;
+      /* color: #333; */
+      /* text-align: center;
+      line-height: 160px; */
+      padding: 0px;
+    } 
+    /* .el-aside{
+    background-color:#b6b4b5;
+    color:#3331; 
+    text-align: center;
+    line-height: 200px;
+    } */
      
-    </style>
+    /* .el-container{
+    margin-bottom: 40px;
+    } */
+
+</style>
