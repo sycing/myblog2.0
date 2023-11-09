@@ -349,25 +349,16 @@ class MyPage(PageNumberPagination):
     page_query_param = 'page'
 
 class CatagoryViewSet(viewsets.ModelViewSet):
-    """
-
-    """
     queryset = models.Category.objects.all()
     pagination_class = MyPage
     # filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     serializer_class =CatagorySerializer
 class TagViewSet(viewsets.ModelViewSet):
-    """
-
-    """
     queryset = models.Tag.objects.all()
     pagination_class = MyPage
     # filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     serializer_class =TagSerializer
 class EntryViewSet(viewsets.ModelViewSet):
-    """
-
-    """
     queryset = models.Entry.objects.all()
     pagination_class = MyPage
     # filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
