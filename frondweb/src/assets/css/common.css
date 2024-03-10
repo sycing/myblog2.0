@@ -1,0 +1,69 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+/*    去掉填充物*/
+}
+body{
+    height: 100%;
+    /* background-image:url("../img/背景.jpg") ; */
+    background-position:center center ;
+    /*居中*/
+    background-size:cover;
+    /*全覆盖*/
+    background-repeat:no-repeat;
+    /*无重复*/
+}
+
+.container{
+    height: calc(100% - 50px);
+    /* width:1200px; */
+    margin: 0 auto;
+    /*居中*/
+    /* display: flex; */
+    justify-content: space-between;
+    /*两端没空隙*/
+    /*水平上按分割的方式对齐*/
+    align-items: center;
+    /*垂直对齐*/
+}
+.container-left{
+    /* height:100%; */
+    width:300px;
+}
+.container-right{
+    height: 100%;
+    width:800px;
+    /*当内容超过外部容器的高度时，怎么办？auto：没超过时正常显示，超出时，出现滚动条*/
+    overflow: auto;
+    background-color:rgba(240, 167, 167, 0.8);
+    border-radius: 10px;
+}
+.card{
+    background-color: #bbd9f5;
+    border-radius:10px;
+    padding: 30px;
+}
+.card .avatar{
+    margin-left: 50px;
+    width: 140px;
+    border-radius: 50%;
+}
+.card h3{
+    text-align: center;
+    padding: 20px;
+}
+.card a{
+    display: block;
+    /*强制改为块元素，可以设置宽高*/
+    text-align: center;
+    color: #bbd9f5;
+    text-decoration: none;
+    padding: 10px;
+}
+.card .counter{
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+    /*两边有空隙*/
+}

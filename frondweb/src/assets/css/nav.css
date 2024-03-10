@@ -1,0 +1,36 @@
+.nav{
+    /*导航栏设置*/
+    width:100%;
+    height:50px;
+    background-color:#89cbf7;
+    /* color: #2e0af8; */
+    /*字体为白色*/
+    /* display:flex; */
+    /*弹性布局*/
+    justify-content: left;
+    align-items: center;
+    /*平向左，居中对齐*/
+
+   
+}
+.nav img{
+    /*图片设置*/
+    /*规定图片大小时，尽量只规定高或者宽，这样图片不会被拉伸变形*/
+    height: 40px;
+    margin-left: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+.nav .spacer{
+    width: 70%;
+    /*把空格撑开*/
+}
+.nav a{
+    /*a标签设置*/
+    color:#0c0c0c;
+    /*标签颜色：白色*/
+    text-decoration: none;
+    /*文本装饰：无*/
+    padding: 0 10px;
+    /*左右空开10像素*/
+}
